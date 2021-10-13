@@ -11,10 +11,13 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [back, setBack] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
-  if (isSuccess) {
+  const path = window.location.pathname;
+  if (path === "/") {
+    window.location.href = "https://adscoin.id/";
+  }else if (isSuccess) {
     return <SuccessScreen />;
   }
+
   return (
     <div className="container mt-5 mb-5 px-4">
       <div className="row d-flex align-items-center justify-content-center">
@@ -69,9 +72,10 @@ const App = () => {
             <div>
               <h6 className="text-black d-flex align-items-center justify-content-center">Download aplikasi kami di play store</h6>
             </div>
-            <br />
             <div className="d-flex align-items-center justify-content-center">
-              <img src={playstoreImage} alt={playstoreImage} height="40px" width="140px" />
+              <a href="https://play.google.com/store/apps/details?id=com.adscoin">
+                <img src={playstoreImage} alt={playstoreImage} height="40px" width="140px" />
+              </a>
             </div>
             <div className="col-8"></div>
           </div>

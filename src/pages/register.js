@@ -24,12 +24,8 @@ const Register = ({ callbackResponse, dataReg = null }) => {
   const lengthTextpin = 6;
   const lengthTextconfirmationPin = 6;
   useEffect(() => {
-    const path = window.location.pathname;
-    if (path === "/") {
-      window.location.href = "https://adscoin.id/";
-    } else {
-      setReferralCode(path.replace("/", ""));
-    }
+        const path = window.location.pathname;
+        setReferralCode(path.replace("/", ""));
   }, []);
 
   useEffect(() => {
@@ -62,10 +58,8 @@ const Register = ({ callbackResponse, dataReg = null }) => {
             email: email,
             mobile_no: phoneNumber,
             pin: pin,
-            // sponsor: referralCode,
-            sponsor: "AC5711868821",
-            signup_source: "apps",
-            kode_otp: res.result.otp_anying,
+            sponsor: referralCode,
+            signup_source: "website",
           },
           ""
         );

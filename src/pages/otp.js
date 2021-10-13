@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactCodeInput from "react-code-input";
 import { postOtp } from "../action/auth.action";
 import { handlePost } from "../helper";
-const INITIAL_COUNT = 10;
 const INITIAL_LENGT_CODE = 4;
 const STATUS = {
   STARTED: "Started",
@@ -12,7 +11,7 @@ const STATUS = {
 const Otp = ({ dataReg, callbackResponse }) => {
   const twoDigits = (num) => String(num).padStart(2, "0");
   const [loading, setLoading] = useState(false);
-  const [secondsRemaining, setSecondsRemaining] = useState(INITIAL_COUNT);
+  const [secondsRemaining, setSecondsRemaining] = useState(120);
   const [status, setStatus] = useState(STATUS.STOPPED);
   const [valCode, setValCode] = useState("");
 
@@ -56,7 +55,7 @@ const Otp = ({ dataReg, callbackResponse }) => {
       postOtp(dataOtp, (res, status, msg, isLoading) => {
         if (status) {
           setStatus(STATUS.STARTED);
-          setSecondsRemaining(10);
+          setSecondsRemaining(120);
         } else {
           callbackResponse("", msg);
         }
@@ -65,13 +64,13 @@ const Otp = ({ dataReg, callbackResponse }) => {
     }
   };
 
-  const handleSend = () => {
+  const handleSend = (res) => {
     setLoading(true);
+    dataReg.kode_otp = res;
     handlePost({
       url: "auth/register",
       data: dataReg,
       callback: (res, msg, status) => {
-        setStatus(STATUS.STOPPED);
         setSecondsRemaining(0);
         if (res !== null) {
           if (status) {
@@ -96,7 +95,7 @@ const Otp = ({ dataReg, callbackResponse }) => {
         onChange={(res) => {
           setValCode(res);
           if (res.length === INITIAL_LENGT_CODE) {
-            handleSend();
+            handleSend(res);
           }
         }}
         type="password"

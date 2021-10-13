@@ -14,7 +14,6 @@ export const postOtp = (data, callback) => {
     data: dataOtp,
     callback: (res, msg, status) => {
       isLoading = false;
-      console.log(isLoading);
       callback(res, status, msg, isLoading);
     },
   });

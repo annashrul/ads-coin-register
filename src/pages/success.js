@@ -3,6 +3,12 @@ import playstoreImage from "../assets/playstore.png";
 import React from "react";
 
 const SuccessScreen = () => {
+  const doStuff=()=> {
+    if (window.confirm('Unduh aplikasi adscoin di playstore?')) window.location.href = "https://play.google.com/store/apps/details?id=com.adscoin";
+    clearInterval(interval);
+  }
+  const interval =setInterval(doStuff, 1000);
+
   return (
     <div className="container mt-5 mb-5 px-4">
       <div className="row d-flex align-items-center justify-content-center">
@@ -18,7 +24,9 @@ const SuccessScreen = () => {
             </div>
             <br />
             <div className="d-flex align-items-center justify-content-center">
-              <img src={playstoreImage} alt={playstoreImage} height="40px" width="140px" />
+              <a href="https://play.google.com/store/apps/details?id=com.adscoin">
+                <img src={playstoreImage} alt={playstoreImage} height="40px" width="140px" />
+              </a>
             </div>
             <div className="col-8"></div>
           </div>
